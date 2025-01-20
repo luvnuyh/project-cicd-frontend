@@ -52,7 +52,7 @@ jobs:
       # 타겟 : /home/ubuntu/client
       # 대상 위치에 존재하는 모든 리소스를 ec2의 ~/client 하위에 복사하라는 뜻
       - name: EC2에 빌드 결과물들 업로드
-        uses: applebot/scp-action@v0.1.7
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
