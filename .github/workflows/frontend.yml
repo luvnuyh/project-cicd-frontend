@@ -1,0 +1,31 @@
+name: React CI/CD
+
+# 트리거: push, pr(풀리퀘스트) 이벤트 발생시 작동, 브런치는 메인.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# 해야할 일
+jobs:
+  react-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 체크아웃 -> 깃허브의 저장소로부터 소스 체크아웃
+      - name: Checkout repository resource
+        uses: actions/checkout@v2
+
+      # 환경변수 동적 생성 -> .env 파일 생성(ec2에 관련된 정보 ㅅ세팅)
+      - name: .env 환경 변수 동적 생성
+        run: |
+          echo "${{secrets.CLIENT_ENV}}" > .env
+          pwd
+          ls -al
+      # 빌드를 위한 조건 -> node.js 설치
+      # npm install 라이브러리 설치
+      # 빌드
+      # 빌드의 겨로가물을 ec2에 업로드
+      # 뒷정리업로드 결괴 -> nginx의 root로 이동 , 디렉토리 정리)
